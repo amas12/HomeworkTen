@@ -57,6 +57,7 @@ public class SystemPropertiesTests {
         String version = System.getProperty("version", "91");
         String browserSize = System.getProperty("browserSize", "300x300");
 
+
         System.out.println(browser);
         System.out.println(version);
         System.out.println(browserSize);

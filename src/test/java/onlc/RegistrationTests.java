@@ -14,10 +14,11 @@ public class RegistrationTests extends TestBase {
     void fillFormTest() {
 
 
+
         step("Открываем страницу", () -> {
             open("/automation-practice-form");
         });
-        step("Название формы", () -> {
+        step("Название", () -> {
             $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         });
         step("Ввести имя", () -> {
