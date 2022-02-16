@@ -11,9 +11,7 @@ import static io.qameta.allure.Allure.step;
 public class RegistrationTests extends TestBase {
 
     @Test
-    void fillFormTest() {
-
-
+    void registrationTests() {
 
         step("Открываем страницу", () -> {
             open("/automation-practice-form");
