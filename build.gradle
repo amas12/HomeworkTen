@@ -33,6 +33,7 @@ dependencies {
     testRuntimeOnly(
             "org.slf4j:slf4j-simple:1.7.29",
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    implementation 'com.github.javafaker:javafaker:1.0.2'
 }
 
 tasks.withType(Test) {
@@ -50,6 +51,7 @@ tasks.withType(Test) {
         }
     }
 }
+
 
 task properties_tests(type: Test) {
     useJUnitPlatform{

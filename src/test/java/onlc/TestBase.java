@@ -8,36 +8,39 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
 
+
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
+
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("browserVersion", "91");
+        Configuration.browserSize = System.getProperty("browserSize", "1280x1024");
 
-        String browser = System.getProperty("browser", "chrome1");
-        String version = System.getProperty("version", "911");
-        String remoteUrl = System.getProperty("remoteUrl", "selenoid.autotests.cloud/wd/hub1");
-        String login = System.getProperty("login", "user11");
-        String pass = System.getProperty("pass", "12341");
-
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        String remoteUrl = System.getProperty("remoteUrl");
+        String user = System.getProperty("user");
+        String password = System.getProperty("password");
+        Configuration.remote = "https://" + user + ":" + password + "@" + remoteUrl;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
     }
+
     @AfterEach
-    void addAttachments() {
-        Attach.screenshotAs("Last screenshot");
+    public void tearDown() {
+        Attach.screenshotAs("Screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
         closeWebDriver();
+
     }
+
 }
